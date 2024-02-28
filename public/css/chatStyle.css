@@ -1,0 +1,126 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    font-family: "Arial", serif;
+}
+
+.chat-container {
+    width: 600px;
+    margin: auto;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    overflow: hidden;
+}
+
+#messages {
+    list-style-type: none;
+    padding: 0 20px;
+    overflow-y: auto;
+    margin-top: 20px;
+    flex-grow: 1;
+}
+
+#messages li {
+    padding: 8px 16px;
+    margin: 5px 0;
+    border-radius: 20px;
+    max-width: 80%;
+    word-wrap: break-word;
+    clear: both;
+}
+
+.sent-message, .received-message {
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin: 5px;
+    word-wrap: break-word;
+}
+
+.sent-message {
+    color: white;
+    background-color: darkslategrey;
+    float: right;
+    margin-right: 20px;
+}
+
+.received-message {
+    background-color: #dddddd;
+    float: left;
+    margin-left: 20px;
+}
+
+.message-sender {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.message-text {
+    word-wrap: break-word;
+}
+
+#form {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    align-items: center;
+    background: white;
+}
+
+#input, button {
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+}
+
+#input {
+    flex-grow: 1;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    cursor: pointer;
+    background-color: darkslategrey;
+    border: none;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: 95%;
+        height: 90vh;
+    }
+
+    #messages li {
+        max-width: 70%;
+    }
+
+    #form {
+        flex-direction: column;
+        padding: 5px;
+    }
+
+    #input {
+        margin: 10px 0;
+        width: calc(100% - 20px);
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    #messages li {
+        max-width: 100%;
+    }
+}

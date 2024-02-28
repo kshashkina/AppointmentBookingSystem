@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='/css/editProfile.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+        title Create Doctor
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Create Doctor
+                form(method="POST" action="/admin/doctor/create")
+                    div
+                        label(for="firstName") First Name:
+                        input(type="text" id="firstName" name="firstName" required)
+                    div
+                        label(for="lastName") Last Name:
+                        input(type="text" id="lastName" name="lastName" required)
+                    div
+                        label(for="password") Password:
+                        input(type="password" id="password" name="password" required)
+                    div
+                        label(for="specialization") Specialization:
+                        input(type="text" id="specialization" name="specialization" required)
+                    div
+                        label(for="workSchedule") Work Schedule (comma-separated):
+                        input(type="text" id="workSchedule" name="workSchedule" required)
+                    div
+                        label(for="roomNumber") Room Number:
+                        input(type="text" id="roomNumber" name="roomNumber" required)
+                    div
+                        label(for="email") Contact Info:
+                        input(type="text" id="email" name="email" required)
+                    div
+                        label(for="availableAppointments") Available Appointments (YYYY-MM-DD HH:MM, comma-separated):
+                        input(type="text" id="availableAppointments" name="availableAppointments" required)
+                    div
+                        button(type="submit") Create Doctor

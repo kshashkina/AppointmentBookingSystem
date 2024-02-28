@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Registration
+        link(rel='stylesheet', href='/css/register.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Registration
+                form#registrationForm(action="/auth/register" method="post")
+                    .form-group
+                        label(for="firstName") First Name:
+                        input(autocomplete="off" type="text" name="firstName" required)
+                    .form-group
+                        label(for="lastName") Last Name:
+                        input(autocomplete="off" type="text" name="lastName" required)
+                    .form-group
+                        label(for="email") Email:
+                        input(autocomplete="off" type="email" name="email" required)
+                    .form-group
+                        label(for="password") Password:
+                        input(autocomplete="off" type="password" name="password" required)
+                    .form-group
+                        label(for="dateOfBirth") Date of Birth:
+                        input(type="date" name="dateOfBirth")
+                    .form-group
+                        label(for="gender") Gender:
+                        select(name="gender")
+                            option(value="male") Male
+                            option(value="female") Female
+                    .form-group
+                        label(for="address") Address:
+                        input(autocomplete="off" type="text" name="address")
+                    .form-group
+                        label(for="phoneNumber") Phone Number:
+                        input(autocomplete="off" type="tel" name="phoneNumber")
+                    .form-group
+                        label(for="role") Role:
+                        select(name="role")
+                            option(value="patient") Patient
+                            option(value="admin") Admin
+                    button(type="submit") Register
+                p Already registered? #[a(href="/auth/login") Log in]
+        script(src="/javascript/registerHandler.js")
+

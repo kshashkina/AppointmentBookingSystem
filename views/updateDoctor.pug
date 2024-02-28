@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='/css/editProfile.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+        title Update Doctor
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Update Doctor
+                form(method="POST" action=`/admin/doctor/edit/${doctor._id}`)
+                    div
+                        label(for="firstName") First Name:
+                        input(type="text" id="firstName" name="firstName" required value=doctor.firstName)
+                    div
+                        label(for="lastName") Last Name:
+                        input(type="text" id="lastName" name="lastName" required value=doctor.lastName)
+                    div
+                        label(for="specialization") Specialization:
+                        input(type="text" id="specialization" name="specialization" required value=doctor.specialization)
+                    div
+                        label(for="workSchedule") Work Schedule (comma-separated):
+                        input(type="text" id="workSchedule" name="workSchedule" required value=doctor.workSchedule.join(', '))
+                    div
+                        label(for="roomNumber") Room Number:
+                        input(type="text" id="roomNumber" name="roomNumber" required value=doctor.roomNumber)
+                    div
+                        label(for="email") Contact Info:
+                        input(type="text" id="email" name="email" required value=doctor.email)
+                    div
+                        label(for="availableAppointments") Available Appointments (YYYY-MM-DD HH:MM, comma-separated):
+                        - var formattedAppointments = doctor.availableAppointments.map(appointment => appointment.toISOString().replace(/T/, ' ').replace(/\..+/, ''))
+                        input(type="text" id="availableAppointments" name="availableAppointments" required value=formattedAppointments.join(', '))
+                    div
+                        button(type="submit") Update Doctor

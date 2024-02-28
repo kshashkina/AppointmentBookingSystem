@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Book Appointment
+        link(rel='stylesheet', href='/css/appointmentBooking.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        h1 Book an Appointment
+        h2 #{doctor.firstName} #{doctor.lastName}
+
+        form(action="/appointments/book" method="post")
+            input(type="hidden", name="doctorId", value=doctor._id)
+
+            label(for="appointmentTime") Choose an appointment time:
+            select(name="appointmentTime" required)
+                each time in availableAppointments
+                    option(value=time)= time
+            button(type="submit") Book Appointment

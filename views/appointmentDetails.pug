@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Appointment Details
+        link(rel='stylesheet', href='/css/appointmentDetails.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Appointment Details
+                div(class="status-" + appointment.status.toLowerCase())
+                    p(class="doctor-info") Doctor: #{appointment.doctor.firstName} #{appointment.doctor.lastName}
+                    p Specialization: #{appointment.doctor.specialization}
+                    p Room Number: #{appointment.doctor.roomNumber}
+                    p Contact Info: #{appointment.doctor.email}
+                    p(class="appointment-date") Date: #{formatAppointmentDate(appointment.appointmentDate)}
+                    p Status: #{appointment.status}

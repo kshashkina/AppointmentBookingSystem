@@ -1,0 +1,67 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='/css/patientProfile.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+        title User Profile
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                .patient-info-container
+                    h1 User Profile
+                    .profile-info
+                        p
+                            | First Name:
+                            span #{patient.firstName}
+                        p
+                            | Last Name:
+                            span #{patient.lastName}
+                        p
+                            | Email:
+                            span #{patient.email}
+                        p
+                            | Date of Birth:
+                            span #{patient.dateOfBirth ? patient.dateOfBirth.toDateString() : 'N/A'}
+                        p
+                            | Gender:
+                            span #{patient.gender}
+                        p
+                            | Address:
+                            span #{patient.address}
+                        p
+                            | Phone Number:
+                            span #{patient.phoneNumber}
+                    form(action="/patient/edit", method="GET")
+                        button(type="submit") Edit Data
+                    form(action="/patient/logout", method="GET")
+                        button(type="submit") Logout
+                    form#deleteForm(action="/patient/delete" method="post")
+                        button#deleteButton(type="button") Delete Profile
+
+            .container
+                h2 My Appointments
+                if appointments.length > 0
+                    each appointment in appointments
+                        .appointment-container
+                            .appointment
+                                h3 Doctor: #{appointment.doctor.firstName} #{appointment.doctor.lastName}
+                                p Date: #{formatAppointmentDate(appointment.appointmentDate)}
+                                p Status: #{appointment.status}
+                                form(action=`/appointments/details/${appointment._id}`, method="GET")
+                                    button(type="submit") View Details
+                                form(action=`/appointments/delete/${appointment._id}`, method="post")
+                                    button(type="submit") Delete Appointment
+                else
+                    p You don't have any appointments yet.
+                form(action="/", method="GET")
+                    button(type="submit") Book Appointment
+    script(src="/javascript/deleteConfirm.js")
+

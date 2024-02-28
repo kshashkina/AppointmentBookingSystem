@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel='stylesheet', href='/css/editProfile.css')
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    title Edit Patient Data
+  body
+    header
+      nav
+        ul
+          li
+            a(href="/")
+              i.fa.fa-home
+    .main
+      .container
+        h1 Edit Patient Data
+        form(action="/patient/edit" method="post")
+          input(type="hidden" name="_method" value="PATCH")
+          label(for="firstName") First Name:
+          input(type="text", id="firstName", name="firstName", value=patient.firstName, required)
+          label(for="lastName") Last Name:
+          input(type="text", id="lastName", name="lastName", value=patient.lastName, required)
+          label(for="email") Email:
+          input(type="email", id="email", name="email", value=patient.email, required)
+          label(for="dateOfBirth") Date of Birth:
+          input(type="date", id="dateOfBirth", name="dateOfBirth", value=patient.dateOfBirth ? patient.dateOfBirth.toISOString().substr(0, 10) : '', required)
+          label(for="gender") Gender:
+          select(id="gender", name="gender", required)
+            option(value="male", selected=patient.gender === "male") Male
+            option(value="female", selected=patient.gender === "female") Female
+          label(for="address") Address:
+          textarea(id="address", name="address", rows="4", required)= patient.address
+          label(for="phoneNumber") Phone Number:
+          input(type="tel", id="phoneNumber", name="phoneNumber", value=patient.phoneNumber, required)
+          button(type="submit") Save Changes

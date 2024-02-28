@@ -1,0 +1,62 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='/css/mainPage.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+        title Main Page
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+                    if role === 'patient'
+                        li: a(href="/patient/profile") Your Profile
+                    else if role === 'admin'
+                        li: a(href="/admin/dashboard") Admin Dashboard
+                    else if role === 'doctor'
+                        li: a(href="/doctor/dashboard") Doctor Dashboard
+                    else
+                        li: a(href="/auth/login") Login
+        main
+            h1 Welcome to Our Medical Center
+            h2 Our Commitment to Excellence
+            p At Our Medical Center, we are committed to providing high-quality, compassionate care to every patient. Our dedicated team of healthcare professionals works tirelessly to ensure that each individual receives personalized attention and the best possible treatment outcomes.
+            h2 Patient-Centered Approach
+            p We believe in treating each patient as a whole person, not just a collection of symptoms. Our patient-centered approach focuses on understanding the unique needs, preferences, and goals of every individual, allowing us to tailor our care plans accordingly and foster meaningful doctor-patient relationships.
+            h2 Comprehensive Services
+            p From preventive care and routine screenings to complex medical treatments and surgeries, Our Medical Center offers a wide range of services to address all your healthcare needs. Our multidisciplinary team collaborates seamlessly to deliver integrated, coordinated care across specialties, ensuring continuity of care and optimal health outcomes.
+            h2 State-of-the-Art Facilities
+            p Our modern facilities are equipped with the latest technology and medical equipment to provide the highest standard of care. We adhere to strict safety protocols and infection control measures to create a safe and hygienic environment for our patients, staff, and visitors.
+            h2 Community Engagement
+            p We are deeply rooted in our community and actively involved in initiatives to promote health and wellness. Through outreach programs, health education seminars, and partnerships with local organizations, we strive to empower individuals and improve the overall health of our community.
+            div.centered-chat
+                button(onclick="window.location.href='/chat'") Our chat
+            if role === 'patient'
+                h2 Meet Our Expert Team
+                select#specializationFilter(name="specialization")
+                    option(value="") All Specializations
+                    each spec in specializations
+                        option(value=spec)= spec
+                button#resetFilter Reset Filter
+                each doctors, spec in doctorsBySpec
+                    h2= spec
+                    ul.doctor-list
+                        each doctor in doctors
+                            li.doctor-card
+                                .doctor-info
+                                    h3= doctor.firstName + " " + doctor.lastName
+                                    each time in doctor.workSchedule
+                                        p= time
+                                form(method="GET" action=`/appointments/book/${doctor._id}`)
+                                    button(type="submit") Book Appointment
+            else if role === 'admin'
+                div.centered-chat
+                    button(onclick="window.location.href='/admin/dashboard'") Go to Admin Page
+            else if role === 'doctor'
+                div.centered-chat
+                    button(onclick="window.location.href='/doctor/dashboard'") Go to Doctor Page
+        script(src="/javascript/mainPage.js")

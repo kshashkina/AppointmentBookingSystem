@@ -1,0 +1,56 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Doctor Profile
+        link(rel='stylesheet', href='/css/patientProfile.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Doctor Profile
+                .doctor-info-container
+                    .profile-info
+                        h2 Doctor Information
+                        p
+                            | First Name:
+                            span #{doctor.firstName}
+                        p
+                            | Last Name:
+                            span #{doctor.lastName}
+                        p
+                            | Specialization:
+                            span #{doctor.specialization}
+                        p
+                            | Room Number:
+                            span #{doctor.roomNumber}
+                        p
+                            | Contact Info:
+                            span #{doctor.email}
+                        p
+                            | Registration Date:
+                            span #{doctor.registrationDate ? doctor.registrationDate.toDateString() : 'N/A'}
+                        form(action="/doctor/logout", method="GET")
+                            button(type="submit") Logout
+            .container
+                if appointments.length > 0
+                    h2 Appointments
+                    each appointment in appointments
+                        .appointment-container
+                            .appointment
+                                p
+                                    | Patient: #{appointment.patient.firstName} #{appointment.patient.lastName}
+                                p
+                                    | Date: #{formatAppointmentDate(appointment.appointmentDate)}
+                                p
+                                    | Status: #{appointment.status}
+                                if appointment.status === 'Pending'
+                                    form(action=`/appointments/confirm/${appointment._id}`, method="POST")
+                                        button(type="submit") Confirm Appointment

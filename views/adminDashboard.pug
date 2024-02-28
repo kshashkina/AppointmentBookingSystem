@@ -1,0 +1,64 @@
+// adminDashboard.pug
+
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Admin Dashboard
+        link(rel='stylesheet', href='/css/patientProfile.css')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css")
+    body
+        header
+            nav
+                ul
+                    li
+                        a(href="/")
+                            i.fa.fa-home
+        .main
+            .container
+                h1 Admin Dashboard
+                .patient-info-container
+                    .profile-info
+                        h2 Admin Information
+                        p
+                            | First Name:
+                            span #{admin.firstName}
+                        p
+                            | Last Name:
+                            span #{admin.lastName}
+                        p
+                            | Email:
+                            span #{admin.email}
+                        p
+                            | Date of Birth:
+                            span #{admin.dateOfBirth ? admin.dateOfBirth.toDateString() : 'N/A'}
+                        p
+                            | Gender:
+                            span #{admin.gender}
+                        p
+                            | Address:
+                            span #{admin.address}
+                        p
+                            | Phone Number:
+                            span #{admin.phoneNumber}
+                    form(action="/admin/edit", method="GET")
+                        button(type="submit") Edit Data
+                    form(action="/admin/logout", method="GET")
+                        button(type="submit") Logout
+                    form#deleteForm(action="/admin/delete" method="post")
+                        button#deleteButton(type="button") Delete Profile
+            .container
+                form(action="/admin/doctor/create", method="GET")
+                    button(type="submit") Create Doctor
+                if doctors.length > 0
+                    each doctor in doctors
+                        .doctor-container
+                            p #{doctor.firstName} #{doctor.lastName}
+                            p #{doctor.specialization}
+                            form(action=`/admin/doctor/edit/${doctor._id}`, method="GET")
+                                button(type="submit") Edit
+                            form(action=`/admin/doctor/delete/${doctor._id}`, method="POST")
+                                button(type="submit") Delete
+    script(src="/javascript/deleteConfirm.js")
+

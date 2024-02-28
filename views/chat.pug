@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Our Chat
+        link(rel="stylesheet" href="css/chatStyle.css")
+        script(src="/socket.io/socket.io.js")
+        script.
+            const userName = "#{userName}";
+            const userRole = "#{userRole}"
+        script(src="/javascript/chat.js")
+    body
+        .chat-container
+            ul#messages
+            form#form(action="")
+                input#input(autocomplete="off")(placeholder="Type your message here...")
+                button Send
