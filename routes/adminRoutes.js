@@ -11,8 +11,10 @@ const router = express.Router();
 
 router.get('/dashboard', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Fetching admin dashboard...');
         const admin = await Admin.findById(req.session.user);
         if (!admin) {
+            console.error('Admin not found');
             return res.status(404).send('Admin not found');
         }
 
@@ -27,8 +29,10 @@ router.get('/dashboard', isAuthenticatedAdmin, async (req, res) => {
 
 router.post('/delete', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Deleting admin...');
         await Admin.findByIdAndDelete(req.session.user);
         req.session.destroy(() => {
+            console.log('Admin deleted, redirecting to login page...');
             res.redirect('/auth/login'); // Redirect to the login page after deletion
         });
     } catch (error) {
@@ -39,8 +43,10 @@ router.post('/delete', isAuthenticatedAdmin, async (req, res) => {
 
 router.get('/edit', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Fetching admin data for editing...');
         const admin = await Admin.findById(req.session.user);
         if (!admin) {
+            console.error('Admin not found');
             return res.status(404).send('Admin not found');
         }
         res.render('adminEdit.pug', { admin });
@@ -51,21 +57,23 @@ router.get('/edit', isAuthenticatedAdmin, async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-    // Clear the session
+    console.log('Logging out...');
     req.session.destroy((err) => {
         if (err) {
             console.error('Error destroying session:', err);
             return res.status(500).send('Internal Server Error');
         }
-        // Redirect to the login page or any other desired location
+        console.log('Session destroyed, redirecting to login page...');
         res.redirect('/auth/login');
     });
 });
 
 router.post('/edit', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Updating admin data...');
         const updatedData = req.body;
         await Admin.findByIdAndUpdate(req.session.user, updatedData);
+        console.log('Admin data updated, redirecting to dashboard...');
         res.redirect('/admin/dashboard');
     } catch (error) {
         console.error('Update admin data error:', error);
@@ -108,25 +116,25 @@ router.get('/doctor/create', isAuthenticatedAdmin, (req, res) => {
 
 router.post('/doctor/edit/:doctorId', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Editing doctor...');
         const doctorId = req.params.doctorId;
         const { firstName, lastName, specialization, workSchedule, roomNumber, contactInfo, availableAppointments } = req.body;
 
         const workScheduleArray = workSchedule.split(',').map(item => item.trim());
         const availableAppointmentsArray = availableAppointments.split(',').map(date => new Date(date.trim()));
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
 
+        console.log('Updating doctor data...');
         await Doctor.findByIdAndUpdate(doctorId, {
             firstName,
             lastName,
             specialization,
-            password: hashedPassword,
             workSchedule: workScheduleArray,
             roomNumber,
             contactInfo,
             availableAppointments: availableAppointmentsArray
         });
 
+        console.log('Redirecting to admin dashboard...');
         res.redirect('/admin/dashboard');
     } catch (error) {
         console.error('Update doctor data error:', error);
@@ -134,11 +142,14 @@ router.post('/doctor/edit/:doctorId', isAuthenticatedAdmin, async (req, res) => 
     }
 });
 
+
 router.get('/doctor/edit/:doctorId', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Fetching doctor for editing...');
         const doctorId = req.params.doctorId;
         const doctor = await Doctor.findById(doctorId);
         if (!doctor) {
+            console.log('Doctor not found');
             return res.status(404).send('Doctor not found');
         }
         res.render('updateDoctor', { doctor });
@@ -150,11 +161,14 @@ router.get('/doctor/edit/:doctorId', isAuthenticatedAdmin, async (req, res) => {
 
 router.post('/doctor/delete/:doctorId', isAuthenticatedAdmin, async (req, res) => {
     try {
+        console.log('Deleting doctor...');
         const doctorId = req.params.doctorId;
         const appointments = await Appointment.find({ doctor: doctorId });
+        console.log('Deleting doctors appointments...');
         await Appointment.deleteMany({ doctor: doctorId });
         const doctor = await Doctor.findByIdAndDelete(doctorId);
         if (!doctor) {
+            console.log('Doctor not found');
             return res.status(404).send('Doctor not found');
         }
 
@@ -165,6 +179,7 @@ router.post('/doctor/delete/:doctorId', isAuthenticatedAdmin, async (req, res) =
                 await patient.save();
             }
         }
+        console.log('Doctor deleted successfully');
         res.redirect('/admin/dashboard');
     } catch (error) {
         console.error('Error deleting doctor:', error);

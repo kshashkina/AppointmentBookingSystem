@@ -47,7 +47,7 @@ body, html {
 
 .sent-message {
     color: white;
-    background-color: darkslategrey;
+    background-color: #4CAF50;
     float: right;
     margin-right: 20px;
 }
@@ -89,7 +89,7 @@ body, html {
 
 button {
     cursor: pointer;
-    background-color: darkslategrey;
+    background-color: #4CAF50;
     border: none;
     color: white;
 }
