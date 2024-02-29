@@ -7,6 +7,7 @@ const Patient = mongoose.model('Patient');
 const { formatAppointmentDate, formatDateTime } = require('../helpers/dateFormating');
 
 const { isAuthenticatedPatient, isAuthenticatedDoctor} = require('../middleware/authenticateCheker');
+const {post} = require("axios");
 router.post('/book', isAuthenticatedPatient, async (req, res) => {
     const { doctorId, appointmentTime } = req.body;
     if (!req.session.user) {
@@ -93,8 +94,16 @@ router.get('/details/:id', isAuthenticatedPatient, async (req, res) => {
             return res.status(404).send('Appointment not found');
         }
         console.log('Appointment details fetched successfully');
-        console.log('Rendering appointment details page...');
-        res.render('appointmentDetails', { appointment, formatAppointmentDate });
+
+        post('http://127.0.0.1:8000/api/render_appointment/', { appointment })
+            .then(djangoResponse => {
+                res.send(djangoResponse.data);
+            })
+            .catch(error => {
+                console.error('Error sending data to Django:', error);
+                res.status(500).send('Error sending data to Django');
+            });
+
     } catch (error) {
         console.error('Error fetching appointment details:', error);
         res.status(500).send('Internal Server Error');
