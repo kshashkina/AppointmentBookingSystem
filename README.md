@@ -4,50 +4,25 @@ The Appointment Booking System is a comprehensive web application designed to fa
 
 ## Features
 ### For Patients:
-#### Registration and Login: 
-Patients can create an account and log in to access the system.
-
-#### Selection of Doctors: 
-Patnts can choose a doctor from a list of available physicians, with the option to filter doctors by specialization for convenience.
-
-#### Doctor Filtering: 
-Ability for patients to filter doctors by specialization for easier selection.
-
-#### Appointment Booking:
-Patients can schedule appointments with their chosen doctor.
-
-#### User Account:
-Patients have a user account where they can update their personal information, logout, and delete their account if desired.
-
-#### Appointment Management:
-Patients can view a list of their appointments with the status of each session, whether it's pending or confirmed.
-
-#### Session Details:
-Patients can view detailed information about each appointment session, including the doctor's details and session specifics.
-
-#### Session Reminders:
-Patients receive email reminders one day before their scheduled appointment, sent at 12:00 AM.
+- Registration and Login: Patients can create an account and log in to access the system.
+- Selection of Doctors: Patnts can choose a doctor from a list of available physicians, with the option to filter doctors by specialization for convenience.
+- Doctor Filtering: Ability for patients to filter doctors by specialization for easier selection.
+- Appointment Booking: Patients can schedule appointments with their chosen doctor.
+- User Account: Patients have a user account where they can update their personal information, logout, and delete their account if desired.
+- Appointment Management: Patients can view a list of their appointments with the status of each session, whether it's pending or confirmed.
+- Session Details: Patients can view detailed information about each appointment session, including the doctor's details and session specifics.
+- Session Reminders: Patients receive email reminders one day before their scheduled appointment, sent at 12:00 AM.
 
 
 ### For Administrators:
-#### Registration and Login: 
-Administrators can register for an account and log in to the system.
-
-#### Administrator Account:
-Administrators have an account with personal information that they can update, as patients.
-
-#### Doctor Management: 
-Administrators have the authority to create, delete, and modify doctor profiles within the system.
+- Registration and Login: Administrators can register for an account and log in to the system.
+- Administrator Account: Administrators have an account with personal information that they can update, as patients.
+- Doctor Management:  Administrators have the authority to create, delete, and modify doctor profiles within the system.
 
 ### For Doctors:
-#### Login:
-Doctors can log in to the system.
-
-#### Doctor Account:
-Doctors have an account with information about themselves.
-
-#### Session Confirmation: 
-Doctors can confirm appointments scheduled with them.
+-  Login: Doctors can log in to the system.
+- Doctor Account: Doctors have an account with information about themselves.
+- Session Confirmation:  Doctors can confirm appointments scheduled with them.
 
 ### General Features:
 #### Chat Functionality: 
@@ -98,7 +73,7 @@ cd webdev_project
 npm install
 ```
 #### Set Up Environment Variables:
-Create a .env file in the root directory.
+Create a` .env` file in the root directory.
 Define environment variables such as database connection details, API keys, etc.
 #### Start the Server:
 ```bash
