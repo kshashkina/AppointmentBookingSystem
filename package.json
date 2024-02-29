@@ -4,27 +4,23 @@
   "dependencies": {
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
-    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "express-session": "^1.18.0",
-    "jsonwebtoken": "^9.0.2",
     "method-override": "^3.0.0",
     "mongoose": "^8.1.2",
     "node-cache": "^5.1.2",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.10",
     "nodemailer-mailgun-transport": "^2.1.5",
     "pug": "^3.0.2",
     "socket.io": "^4.7.4"
   },
   "scripts": {
-    "start-django": "cd django-main && python3 manage.py runserver",
+    "start-django": "cd djangoEndpoints && python manage.py runserver",
     "start-node": "node app.js",
-    "start-both": "concurrently \"npm run start-django\" \"npm run start-node\"",
-    "kill-ports": "kill -9 $(lsof -t -i:3000,8000) || true"
+    "start-both": "concurrently \"npm run start-django\" \"npm run start-node\""
   }
 }
