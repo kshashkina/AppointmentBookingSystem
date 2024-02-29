@@ -9,7 +9,7 @@ exports.getIndexPage = async (req, res) => {
         const cachedData = myCache.get(cacheKey);
         if (cachedData) {
             console.log('Fetching index page data from cache...');
-            return res.render('index', cachedData);
+            return res.render('index', { ...cachedData, role: req.session.role });
         }
 
         console.log('Fetching index page data from database...');
@@ -29,7 +29,6 @@ exports.getIndexPage = async (req, res) => {
                 doctorsBySpec[spec] = await Doctor.find({ specialization: spec });
             }
             myCache.set(cacheKey, {
-                role: req.session.role,
                 doctorsBySpec: doctorsBySpec,
                 specializations: specializations,
                 currentFilter: req.query.specialization || ""

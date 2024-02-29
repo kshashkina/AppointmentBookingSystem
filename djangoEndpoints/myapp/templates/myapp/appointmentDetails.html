@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details</title>
+    <style>
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .appointment-details {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .appointment-details p {
+            margin-bottom: 10px;
+        }
+
+
+        .doctor-info {
+            font-weight: bold;
+        }
+
+        .appointment-date {
+            font-weight: bold;
+        }
+
+        .status {
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .status-confirmed {
+            border-left: 4px solid #4CAF50;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .status-pending {
+            border-left: 4px solid #f0ad4e;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+</head>
+<body>
+<div class="main">
+    <div class="container">
+        <h1>Appointment Details</h1>
+        <div class="status-{{ appointment.appointment.status|lower }}">
+            <p class="doctor-info">Doctor: {{ appointment.appointment.doctor.firstName }} {{ appointment.appointment.doctor.lastName }}</p>
+            <p>Specialization: {{ appointment.appointment.doctor.specialization }}</p>
+            <p>Room Number: {{ appointment.appointment.doctor.roomNumber }}</p>
+            <p>Contact Info: {{ appointment.appointment.doctor.email }}</p>
+            <p class="appointment-date">Date: {{ appointment.appointment.appointmentDate }}</p>
+            <p>Status: {{ appointment.appointment.status }}</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
