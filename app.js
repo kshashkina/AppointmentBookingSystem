@@ -15,13 +15,14 @@ const doctorRoutes = require('./routes/doctorRoutes');
 const chatRoute = require('./routes/chatRoute')
 const chatController = require('./controlers/socketController');
 const corsCheck = require('./middleware/corsChecker');
-
-// const sendReminderEmails = require('./controlers/messageSenderController');
 require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
+
+require('./controlers/remainderScheduled');
+
 
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
@@ -49,9 +50,6 @@ app.use('/doctor', doctorRoutes);
 app.use(chatRoute);
 
 chatController.handleSocketConnection(server);
-
-// Send reminder emails functionality
-// sendReminderEmails();
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
